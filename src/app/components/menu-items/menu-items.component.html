@@ -1,0 +1,30 @@
+<div class="menu-container">
+  <div class="category-selector">
+    <button 
+      *ngFor="let category of ['breakfast', 'lunch', 'dinner']"
+      [class.active]="selectedCategory === category"
+      (click)="onCategoryChange(category as 'breakfast' | 'lunch' | 'dinner')"
+      class="category-btn">
+      {{ category | titlecase }}
+    </button>
+  </div>
+
+  <div class="menu-grid">
+    <div *ngFor="let item of menuItems" class="menu-item-card">
+      <div class="menu-item-image" *ngIf="item.imageUrl">
+        <img [src]="item.imageUrl" [alt]="item.name">
+      </div>
+      <div class="menu-item-content">
+        <h3>{{ item.name }}</h3>
+        <p class="description">{{ item.description }}</p>
+        <p class="price">${{ item.price.toFixed(2) }}</p>
+        <button 
+          (click)="addToOrder(item)"
+          [disabled]="!item.isAvailable"
+          class="add-to-order-btn">
+          {{ item.isAvailable ? 'Add to Order' : 'Not Available' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div> 

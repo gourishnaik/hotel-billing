@@ -1,0 +1,151 @@
+.order-summary {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+.order-summary h2 {
+  margin: 0 0 20px 0;
+  color: #333;
+  text-align: center;
+}
+
+.order-items {
+  margin-bottom: 20px;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.item-details {
+  flex: 1;
+}
+
+.item-details h3 {
+  margin: 0 0 5px 0;
+  color: #333;
+}
+
+.item-description {
+  color: #666;
+  font-size: 0.9em;
+  margin: 0;
+}
+
+.item-quantity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 20px;
+}
+
+.item-quantity button {
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+  transition: background-color 0.3s ease;
+}
+
+.item-quantity button:hover {
+  background-color: #e0e0e0;
+}
+
+.item-quantity span {
+  font-weight: bold;
+  min-width: 30px;
+  text-align: center;
+}
+
+.item-price {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.item-price p {
+  margin: 0;
+  font-weight: bold;
+  color: #1976d2;
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  color: #ff5252;
+  font-size: 1.5em;
+  cursor: pointer;
+  padding: 0 5px;
+}
+
+.remove-btn:hover {
+  color: #ff1744;
+}
+
+.order-total {
+  text-align: right;
+  margin: 20px 0;
+  padding-top: 20px;
+  border-top: 2px solid #eee;
+}
+
+.order-total h3 {
+  margin: 0;
+  color: #333;
+}
+
+.order-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.cancel-btn, .complete-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cancel-btn {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.cancel-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.complete-btn {
+  background-color: #1976d2;
+  color: white;
+}
+
+.complete-btn:hover {
+  background-color: #1565c0;
+}
+
+.no-order {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  margin: 20px auto;
+  max-width: 600px;
+} 

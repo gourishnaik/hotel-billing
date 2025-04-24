@@ -1,0 +1,36 @@
+<div class="order-summary" *ngIf="currentOrder">
+  <h2>Current Order</h2>
+  
+  <div class="order-items">
+    <div *ngFor="let item of currentOrder.items" class="order-item">
+      <div class="item-details">
+        <h3>{{ item.menuItem.name }}</h3>
+        <p class="item-description">{{ item.menuItem.description }}</p>
+      </div>
+      
+      <div class="item-quantity">
+        <button (click)="updateQuantity(item, item.quantity - 1)">-</button>
+        <span>{{ item.quantity }}</span>
+        <button (click)="updateQuantity(item, item.quantity + 1)">+</button>
+      </div>
+      
+      <div class="item-price">
+        <p>${{ item.subtotal.toFixed(2) }}</p>
+        <button class="remove-btn" (click)="removeItem(item.menuItem.id)">×</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="order-total">
+    <h3>Total: ${{ currentOrder.total.toFixed(2) }}</h3>
+  </div>
+
+  <div class="order-actions">
+    <button class="cancel-btn" (click)="cancelOrder()">Cancel Order</button>
+    <button class="complete-btn" (click)="completeOrder()">Complete Order</button>
+  </div>
+</div>
+
+<div class="no-order" *ngIf="!currentOrder">
+  <p>No active order. Start by adding items from the menu.</p>
+</div> 
