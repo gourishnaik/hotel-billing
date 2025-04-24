@@ -9,6 +9,7 @@
   justify-content: center;
   gap: 10px;
   margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
 .category-btn {
@@ -18,6 +19,7 @@
   background-color: #f0f0f0;
   cursor: pointer;
   transition: all 0.3s ease;
+  min-width: 120px;
 }
 
 .category-btn:hover {
@@ -100,4 +102,22 @@
 .add-to-order-btn:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+}
+
+.bill-details {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 768px) {
+  .category-selector {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .category-btn {
+    width: 100%;
+  }
 } 

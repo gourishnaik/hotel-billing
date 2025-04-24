@@ -1,15 +1,21 @@
 <div class="menu-container">
   <div class="category-selector">
     <button 
-      *ngFor="let category of ['breakfast', 'lunch', 'dinner']"
+      *ngFor="let category of categories"
       [class.active]="selectedCategory === category"
-      (click)="onCategoryChange(category as 'breakfast' | 'lunch' | 'dinner')"
+      (click)="onCategoryChange(category)"
       class="category-btn">
       {{ category | titlecase }}
     </button>
+    <button 
+      [class.active]="selectedCategory === 'bills'"
+      (click)="onCategoryChange('bills')"
+      class="category-btn">
+      Bill Details
+    </button>
   </div>
 
-  <div class="menu-grid">
+  <div class="menu-grid" *ngIf="selectedCategory !== 'bills'">
     <div *ngFor="let item of menuItems" class="menu-item-card">
       <div class="menu-item-image" *ngIf="item.imageUrl">
         <img [src]="item.imageUrl" [alt]="item.name">
@@ -17,7 +23,7 @@
       <div class="menu-item-content">
         <h3>{{ item.name }}</h3>
         <p class="description">{{ item.description }}</p>
-        <p class="price">${{ item.price.toFixed(2) }}</p>
+        <p class="price">₹{{ item.price.toFixed(2) }}</p>
         <button 
           (click)="addToOrder(item)"
           [disabled]="!item.isAvailable"
@@ -26,5 +32,9 @@
         </button>
       </div>
     </div>
+  </div>
+
+  <div class="bill-details" *ngIf="selectedCategory === 'bills'">
+    <app-bill-details></app-bill-details>
   </div>
 </div> 

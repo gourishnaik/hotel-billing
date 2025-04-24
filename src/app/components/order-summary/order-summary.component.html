@@ -15,14 +15,14 @@
       </div>
       
       <div class="item-price">
-        <p>${{ item.subtotal.toFixed(2) }}</p>
+        <p>₹{{ item.subtotal.toFixed(2) }}</p>
         <button class="remove-btn" (click)="removeItem(item.menuItem.id)">×</button>
       </div>
     </div>
   </div>
 
   <div class="order-total">
-    <h3>Total: ${{ currentOrder.total.toFixed(2) }}</h3>
+    <h3>Total: ₹{{ currentOrder.total.toFixed(2) }}</h3>
   </div>
 
   <div class="order-actions">

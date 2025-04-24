@@ -1,0 +1,126 @@
+.bill-details-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.bill-details-container h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.today-total {
+  background-color: #1976d2;
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.today-total h3 {
+  margin: 0;
+  font-size: 1.2em;
+}
+
+.bills-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.bill-card {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.bill-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.bill-header h3 {
+  margin: 0;
+  color: #1976d2;
+}
+
+.bill-date {
+  color: #666;
+  margin: 0;
+}
+
+.bill-items {
+  margin-bottom: 15px;
+}
+
+.bill-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px dashed #eee;
+}
+
+.item-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.item-name {
+  color: #333;
+}
+
+.item-quantity {
+  color: #666;
+  font-size: 0.9em;
+}
+
+.item-price {
+  font-weight: bold;
+  color: #1976d2;
+}
+
+.bill-footer {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 2px solid #eee;
+}
+
+.bill-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.total-amount {
+  color: #1976d2;
+  font-size: 1.2em;
+}
+
+.bill-info {
+  color: #666;
+  font-size: 0.9em;
+}
+
+.bill-info p {
+  margin: 5px 0;
+}
+
+.no-bills {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+} 

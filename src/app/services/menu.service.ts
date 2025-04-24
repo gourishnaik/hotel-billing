@@ -11,7 +11,7 @@ export class MenuService {
       id: 1,
       name: 'Continental Breakfast',
       description: 'Assorted pastries, fruits, and coffee',
-      price: 15.99,
+      price: 1299.99,
       category: 'breakfast',
       isAvailable: true
     },
@@ -19,7 +19,7 @@ export class MenuService {
       id: 2,
       name: 'Full English Breakfast',
       description: 'Eggs, bacon, sausage, beans, and toast',
-      price: 18.99,
+      price: 1499.99,
       category: 'breakfast',
       isAvailable: true
     },
@@ -27,7 +27,7 @@ export class MenuService {
       id: 3,
       name: 'Caesar Salad',
       description: 'Fresh romaine lettuce with Caesar dressing',
-      price: 12.99,
+      price: 899.99,
       category: 'lunch',
       isAvailable: true
     },
@@ -35,7 +35,7 @@ export class MenuService {
       id: 4,
       name: 'Grilled Salmon',
       description: 'Fresh salmon with seasonal vegetables',
-      price: 24.99,
+      price: 1899.99,
       category: 'dinner',
       isAvailable: true
     }

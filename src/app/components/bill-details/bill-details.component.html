@@ -1,0 +1,41 @@
+<div class="bill-details-container">
+  <h2>Bill Details</h2>
+
+  <div class="today-total">
+    <h3>Today's Grand Total: ₹{{ todayTotal.toFixed(2) }}</h3>
+  </div>
+
+  <div class="bills-list" *ngIf="completedOrders.length > 0">
+    <div *ngFor="let order of completedOrders" class="bill-card">
+      <div class="bill-header">
+        <h3>Bill #{{ order.id }}</h3>
+        <p class="bill-date">{{ getOrderDate(order.date) }}</p>
+      </div>
+
+      <div class="bill-items">
+        <div *ngFor="let item of order.items" class="bill-item">
+          <div class="item-info">
+            <span class="item-name">{{ item.menuItem.name }}</span>
+            <span class="item-quantity">x{{ item.quantity }}</span>
+          </div>
+          <span class="item-price">₹{{ item.subtotal.toFixed(2) }}</span>
+        </div>
+      </div>
+
+      <div class="bill-footer">
+        <div class="bill-total">
+          <span>Total Amount:</span>
+          <span class="total-amount">₹{{ order.total.toFixed(2) }}</span>
+        </div>
+        <div class="bill-info" *ngIf="order.tableNumber || order.customerName">
+          <p *ngIf="order.tableNumber">Table: {{ order.tableNumber }}</p>
+          <p *ngIf="order.customerName">Customer: {{ order.customerName }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="no-bills" *ngIf="completedOrders.length === 0">
+    <p>No completed orders found.</p>
+  </div>
+</div> 

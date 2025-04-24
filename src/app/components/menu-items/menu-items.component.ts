@@ -10,7 +10,8 @@ import { MenuItem } from '../../models/menu-item.model';
 })
 export class MenuItemsComponent implements OnInit {
   menuItems: MenuItem[] = [];
-  selectedCategory: 'breakfast' | 'lunch' | 'dinner' = 'breakfast';
+  selectedCategory: 'breakfast' | 'lunch' | 'dinner' | 'bills' = 'breakfast';
+  categories: ('breakfast' | 'lunch' | 'dinner')[] = ['breakfast', 'lunch', 'dinner'];
 
   constructor(
     private menuService: MenuService,
@@ -22,15 +23,19 @@ export class MenuItemsComponent implements OnInit {
   }
 
   loadMenuItems(): void {
-    this.menuService.getMenuItemsByCategory(this.selectedCategory)
-      .subscribe(items => {
-        this.menuItems = items;
-      });
+    if (this.selectedCategory !== 'bills') {
+      this.menuService.getMenuItemsByCategory(this.selectedCategory as 'breakfast' | 'lunch' | 'dinner')
+        .subscribe(items => {
+          this.menuItems = items;
+        });
+    }
   }
 
-  onCategoryChange(category: 'breakfast' | 'lunch' | 'dinner'): void {
-    this.selectedCategory = category;
-    this.loadMenuItems();
+  onCategoryChange(category: string): void {
+    if (this.categories.includes(category as 'breakfast' | 'lunch' | 'dinner') || category === 'bills') {
+      this.selectedCategory = category as 'breakfast' | 'lunch' | 'dinner' | 'bills';
+      this.loadMenuItems();
+    }
   }
 
   addToOrder(item: MenuItem): void {
