@@ -10,7 +10,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 })
 export class BillingService {
   // Update this URL with your deployed backend URL
-  private apiUrl = 'https://hotel-billing-backend.onrender.com/api';
+  private apiUrl = 'https://hotel-backend-cfsq.onrender.com/api';
+  
   private orders: Order[] = [];
   private currentOrder: Order | null = null;
   private ordersSubject = new BehaviorSubject<Order[]>(this.orders);
