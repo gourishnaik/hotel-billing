@@ -31,14 +31,14 @@
 }
 
 .menu-section {
-  flex: 2;
+  flex: 7;
   min-width: 0;
 }
 
 .order-section {
-  flex: 1;
+  flex: 5;
   min-width: 300px;
-  max-width: 400px;
+  max-width: 500px;
 }
 
 .tabs-container {

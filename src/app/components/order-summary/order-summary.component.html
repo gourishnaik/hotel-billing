@@ -5,7 +5,7 @@
     <div *ngFor="let item of currentOrder.items" class="order-item">
       <div class="item-details">
         <h3>{{ item.menuItem.name }}</h3>
-        <!-- <p class="item-description">{{ item.menuItem.description }}</p> -->
+        <p class="item-description">{{ item.menuItem.description }}</p>
       </div>
       
       <div class="item-quantity">
@@ -27,6 +27,7 @@
 
   <div class="order-actions">
     <button class="cancel-btn" (click)="cancelOrder()">Cancel Order</button>
+    <button class="print-btn" (click)="printBill()">Print Bill</button>
     <button class="complete-btn" (click)="completeOrder()">Complete Order</button>
   </div>
 </div>
