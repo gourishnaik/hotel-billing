@@ -10,8 +10,8 @@ import { MenuItem } from '../../models/menu-item.model';
 })
 export class MenuItemsComponent implements OnInit {
   menuItems: MenuItem[] = [];
-  selectedCategory: 'breakfast' | 'lunch' | 'dinner' | 'bills' = 'breakfast';
-  categories: ('breakfast' | 'lunch' | 'dinner')[] = ['breakfast', 'lunch', 'dinner'];
+  selectedCategory: 'breakfast' | 'lunch' | 'dinner' | 'cold-drinks' | 'bills' = 'breakfast';
+  categories: ('breakfast' | 'lunch' | 'dinner' | 'cold-drinks')[] = ['breakfast', 'lunch', 'dinner', 'cold-drinks'];
 
   constructor(
     private menuService: MenuService,
@@ -24,7 +24,7 @@ export class MenuItemsComponent implements OnInit {
 
   loadMenuItems(): void {
     if (this.selectedCategory !== 'bills') {
-      this.menuService.getMenuItemsByCategory(this.selectedCategory as 'breakfast' | 'lunch' | 'dinner')
+      this.menuService.getMenuItemsByCategory(this.selectedCategory as 'breakfast' | 'lunch' | 'dinner' | 'cold-drinks')
         .subscribe(items => {
           this.menuItems = items;
         });
@@ -32,8 +32,8 @@ export class MenuItemsComponent implements OnInit {
   }
 
   onCategoryChange(category: string): void {
-    if (this.categories.includes(category as 'breakfast' | 'lunch' | 'dinner') || category === 'bills') {
-      this.selectedCategory = category as 'breakfast' | 'lunch' | 'dinner' | 'bills';
+    if (this.categories.includes(category as 'breakfast' | 'lunch' | 'dinner' | 'cold-drinks') || category === 'bills') {
+      this.selectedCategory = category as 'breakfast' | 'lunch' | 'dinner' | 'cold-drinks' | 'bills';
       this.loadMenuItems();
     }
   }
