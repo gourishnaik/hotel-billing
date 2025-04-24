@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "hotel-billing": {
+    "angular-task": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,10 +13,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/hotel-billing",
+            "outputPath": "dist/angular-task",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "zone.js"
+            ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
@@ -32,19 +34,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
-                }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "maximumWarning": "1mb",
+                  "maximumError": "2mb"
                 }
               ],
               "outputHashing": "all"
@@ -64,10 +55,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "hotel-billing:build:production"
+              "browserTarget": "angular-task:build:production"
             },
             "development": {
-              "browserTarget": "hotel-billing:build:development"
+              "browserTarget": "angular-task:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -75,16 +66,17 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "hotel-billing:build"
+            "browserTarget": "angular-task:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
             "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -94,11 +86,21 @@
             ],
             "scripts": []
           }
-        }
+        },
+      "deploy": {
+  "builder": "angular-cli-ghpages:deploy",
+  "options": {
+    "repo": "https://github.com/gourishnaik/KSRTC-DUTY-OVRTIME-MANAGEMENT.git",
+    "branch": "gh-pages",
+    "baseHref": "/KSRTC-DUTY-OVRTIME-MANAGEMENT/"
+  }
+}
+
+        
       }
     }
   },
   "cli": {
-    "analytics": "d2cce10d-659d-4f28-855e-c489b1963ff5"
+    "analytics": "fe243a58-7e55-48d8-89ef-1ee5754dafb6"
   }
 }
