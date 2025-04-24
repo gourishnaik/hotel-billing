@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BillingService } from '../../services/billing.service';
 import { Order, OrderItem } from '../../models/order.model';
-
+import { SnackbarService } from '../../shared/snackbar/snackbar.service';
 @Component({
   selector: 'app-order-summary',
   templateUrl: './order-summary.component.html',
@@ -10,7 +10,10 @@ import { Order, OrderItem } from '../../models/order.model';
 export class OrderSummaryComponent implements OnInit {
   currentOrder: Order | null = null;
 
-  constructor(private billingService: BillingService) { }
+  constructor(
+    private billingService: BillingService,
+    private snackbarService: SnackbarService
+  ) { }
 
   ngOnInit(): void {
     this.billingService.getCurrentOrder().subscribe(order => {
@@ -21,26 +24,40 @@ export class OrderSummaryComponent implements OnInit {
   updateQuantity(item: OrderItem, newQuantity: number): void {
     if (newQuantity > 0) {
       this.billingService.updateItemQuantity(item.menuItem.id, newQuantity);
+      this.snackbarService.showMessage(`Updated ${item.menuItem.name} quantity to ${newQuantity}`);
     }
   }
 
   removeItem(menuItemId: number): void {
-    this.billingService.removeItemFromOrder(menuItemId);
+    const item = this.currentOrder?.items.find(i => i.menuItem.id === menuItemId);
+    if (item) {
+      this.billingService.removeItemFromOrder(menuItemId);
+      this.snackbarService.showWithAction(
+        `${item.menuItem.name} removed from order`,
+        'Undo',
+        3000
+      );
+    }
   }
 
   completeOrder(): void {
     this.billingService.completeOrder();
+    this.snackbarService.showMessage('Order completed successfully');
   }
 
   cancelOrder(): void {
     this.billingService.cancelOrder();
+    this.snackbarService.showMessage('Order cancelled');
   }
 
   printBill(): void {
     if (!this.currentOrder) return;
 
     const printWindow = window.open('', '_blank');
-    if (!printWindow) return;
+    if (!printWindow) {
+      this.snackbarService.showMessage('Please allow popups to print the bill');
+      return;
+    }
 
     const orderDate = this.currentOrder.date.toLocaleString();
     
@@ -116,5 +133,6 @@ export class OrderSummaryComponent implements OnInit {
       </html>
     `);
     printWindow.document.close();
+    this.snackbarService.showMessage('Bill opened for printing');
   }
 } 

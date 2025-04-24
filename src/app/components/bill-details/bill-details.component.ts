@@ -10,13 +10,26 @@ import { Order } from '../../models/order.model';
 export class BillDetailsComponent implements OnInit {
   completedOrders: Order[] = [];
   todayTotal: number = 0;
+  isLoading: boolean = true;
 
   constructor(private billingService: BillingService) { }
 
   ngOnInit(): void {
-    this.billingService.getOrders().subscribe(orders => {
-      this.completedOrders = orders.filter(order => order.status === 'completed');
-      this.calculateTodayTotal();
+    this.loadOrders();
+  }
+
+  loadOrders(): void {
+    this.isLoading = true;
+    this.billingService.getOrders().subscribe({
+      next: (orders) => {
+        this.completedOrders = orders.filter(order => order.status === 'completed');
+        this.calculateTodayTotal();
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error loading orders:', error);
+        this.isLoading = false;
+      }
     });
   }
 

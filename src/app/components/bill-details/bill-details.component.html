@@ -5,7 +5,12 @@
     <h3>Today's Grand Total: ₹{{ todayTotal.toFixed(2) }}</h3>
   </div>
 
-  <div class="bills-list" *ngIf="completedOrders.length > 0">
+  <div class="loading-container" *ngIf="isLoading">
+    <div class="spinner"></div>
+    <p>Loading bill details...</p>
+  </div>
+
+  <div class="bills-list" *ngIf="!isLoading && completedOrders.length > 0">
     <div *ngFor="let order of completedOrders" class="bill-card">
       <div class="bill-header">
         <h3>Bill #{{ order.orderId }}</h3>
@@ -40,7 +45,7 @@
     </div>
   </div>
 
-  <div class="no-bills" *ngIf="completedOrders.length === 0">
+  <div class="no-bills" *ngIf="!isLoading && completedOrders.length === 0">
     <p>No completed orders found.</p>
   </div>
 </div> 
