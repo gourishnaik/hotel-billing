@@ -8,17 +8,22 @@
   <div class="bills-list" *ngIf="completedOrders.length > 0">
     <div *ngFor="let order of completedOrders" class="bill-card">
       <div class="bill-header">
-        <h3>Bill #{{ order.id }}</h3>
+        <h3>Bill #{{ order.orderId }}</h3>
         <p class="bill-date">{{ getOrderDate(order.date) }}</p>
       </div>
 
       <div class="bill-items">
         <div *ngFor="let item of order.items" class="bill-item">
-          <div class="item-info">
-            <span class="item-name">{{ item.menuItem.name }}</span>
-            <span class="item-quantity">x{{ item.quantity }}</span>
+          <div class="item-details">
+            <strong>{{ item.menuItem.name }}</strong>
+            <p>{{ item.menuItem.description }}</p>
           </div>
-          <span class="item-price">₹{{ item.subtotal.toFixed(2) }}</span>
+          <div class="item-quantity">
+            x{{ item.quantity }}
+          </div>
+          <div class="item-price">
+            ₹{{ item.subtotal.toFixed(2) }}
+          </div>
         </div>
       </div>
 

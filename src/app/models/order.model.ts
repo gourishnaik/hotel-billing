@@ -7,7 +7,7 @@ export interface OrderItem {
 }
 
 export interface Order {
-    id: number;
+    orderId: number;
     items: OrderItem[];
     total: number;
     date: Date;

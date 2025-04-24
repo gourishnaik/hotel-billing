@@ -1,22 +1,26 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 import { Order, OrderItem } from '../models/order.model';
 import { MenuItem } from '../models/menu-item.model';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BillingService {
+  // Update this URL with your deployed backend URL
+  private apiUrl = 'https://hotel-billing-backend.onrender.com/api';
   private orders: Order[] = [];
   private currentOrder: Order | null = null;
   private ordersSubject = new BehaviorSubject<Order[]>(this.orders);
   private currentOrderSubject = new BehaviorSubject<Order | null>(this.currentOrder);
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   createNewOrder(tableNumber?: number, customerName?: string): void {
     this.currentOrder = {
-      id: Date.now(),
+      orderId: Date.now(),
       items: [],
       total: 0,
       date: new Date(),
@@ -73,14 +77,26 @@ export class BillingService {
     this.currentOrder.total = this.currentOrder.items.reduce((sum, item) => sum + item.subtotal, 0);
   }
 
-  completeOrder(): void {
+  async completeOrder(): Promise<void> {
     if (!this.currentOrder) return;
 
     this.currentOrder.status = 'completed';
-    this.orders.push(this.currentOrder);
-    this.ordersSubject.next(this.orders);
-    this.currentOrder = null;
-    this.currentOrderSubject.next(null);
+    try {
+      console.log('Sending order to backend:', this.currentOrder);
+      const savedOrder = await this.http.post<Order>(`${this.apiUrl}/orders`, this.currentOrder).toPromise();
+      console.log('Order saved successfully:', savedOrder);
+      if (savedOrder) {
+        this.orders.push(savedOrder);
+        this.ordersSubject.next(this.orders);
+        this.currentOrder = null;
+        this.currentOrderSubject.next(null);
+      }
+    } catch (error) {
+      console.error('Error saving order:', error);
+      if (error instanceof HttpErrorResponse) {
+        console.error('Error details:', error.error);
+      }
+    }
   }
 
   cancelOrder(): void {
@@ -98,6 +114,20 @@ export class BillingService {
   }
 
   getOrders(): Observable<Order[]> {
-    return this.ordersSubject.asObservable();
+    console.log('Fetching orders from backend...');
+    return this.http.get<Order[]>(`${this.apiUrl}/orders/completed`).pipe(
+      tap(orders => {
+        console.log('Orders received:', orders);
+        this.orders = orders;
+        this.ordersSubject.next(this.orders);
+      }),
+      catchError(error => {
+        console.error('Error fetching orders:', error);
+        if (error instanceof HttpErrorResponse) {
+          console.error('Error details:', error.error);
+        }
+        return throwError(() => error);
+      })
+    );
   }
 } 

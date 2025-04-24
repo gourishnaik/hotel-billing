@@ -42,11 +42,12 @@ export class OrderSummaryComponent implements OnInit {
     const printWindow = window.open('', '_blank');
     if (!printWindow) return;
 
-    const orderDate = new Date(this.currentOrder.date).toLocaleString();
-    const content = `
+    const orderDate = this.currentOrder.date.toLocaleString();
+    
+    printWindow.document.write(`
       <html>
         <head>
-          <title>Bill #${this.currentOrder.id}</title>
+          <title>Bill #${this.currentOrder.orderId}</title>
           <style>
             body {
               font-family: Arial, sans-serif;
@@ -57,8 +58,6 @@ export class OrderSummaryComponent implements OnInit {
             .bill-header {
               text-align: center;
               margin-bottom: 20px;
-              border-bottom: 2px solid #1976d2;
-              padding-bottom: 10px;
             }
             .bill-items {
               margin-bottom: 20px;
@@ -67,27 +66,11 @@ export class OrderSummaryComponent implements OnInit {
               display: flex;
               justify-content: space-between;
               margin-bottom: 10px;
-              padding-bottom: 5px;
-              border-bottom: 1px dashed #ccc;
-            }
-            .item-details {
-              flex: 1;
-            }
-            .item-quantity {
-              margin: 0 20px;
             }
             .bill-total {
               text-align: right;
               font-weight: bold;
-              font-size: 1.2em;
               margin-top: 20px;
-              padding-top: 10px;
-              border-top: 2px solid #1976d2;
-            }
-            .bill-footer {
-              text-align: center;
-              margin-top: 30px;
-              color: #666;
             }
             @media print {
               body {
@@ -101,42 +84,37 @@ export class OrderSummaryComponent implements OnInit {
         </head>
         <body>
           <div class="bill-header">
-            <h1>Hotel Billing System</h1>
-            <h2>Bill #${this.currentOrder.id}</h2>
+            <h2>Bill #${this.currentOrder.orderId}</h2>
             <p>Date: ${orderDate}</p>
           </div>
 
           <div class="bill-items">
             ${this.currentOrder.items.map(item => `
               <div class="bill-item">
-                <div class="item-details">
-                  <strong>${item.menuItem.name}</strong>
-                  <p>${item.menuItem.description}</p>
-                </div>
-                <div class="item-quantity">
-                  x${item.quantity}
-                </div>
-                <div class="item-price">
-                  ₹${item.subtotal.toFixed(2)}
-                </div>
+                <span>${item.menuItem.name} x ${item.quantity}</span>
+                <span>₹${item.subtotal.toFixed(2)}</span>
               </div>
             `).join('')}
           </div>
 
           <div class="bill-total">
-            Total Amount: ₹${this.currentOrder.total.toFixed(2)}
+            <p>Total: ₹${this.currentOrder.total.toFixed(2)}</p>
           </div>
 
-          <div class="bill-footer">
-            <p>Thank you for dining with us!</p>
-            <p>Please visit again</p>
+          <div class="no-print" style="text-align: center; margin-top: 20px;">
+            <button style="    color: #fff;
+    /* height: 30px; */
+    width: auto;
+    background: black;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 10px;
+    cursor: pointer;
+    border: 1px solid white;" onclick="window.print()">Print Bill</button>
           </div>
         </body>
       </html>
-    `;
-
-    printWindow.document.write(content);
+    `);
     printWindow.document.close();
-    printWindow.print();
   }
 } 
