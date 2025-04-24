@@ -2,6 +2,8 @@
   padding: 20px;
   max-width: 800px;
   margin: 0 auto;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .bill-details-container h2 {
@@ -23,12 +25,14 @@
 .today-total h3 {
   margin: 0;
   font-size: 1.2em;
+  word-break: break-word;
 }
 
 .bills-list {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  width: 100%;
 }
 
 .bill-card {
@@ -36,6 +40,8 @@
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .bill-header {
@@ -45,20 +51,25 @@
   margin-bottom: 15px;
   padding-bottom: 10px;
   border-bottom: 1px solid #eee;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .bill-header h3 {
   margin: 0;
   color: #1976d2;
+  word-break: break-word;
 }
 
 .bill-date {
   color: #666;
   margin: 0;
+  white-space: nowrap;
 }
 
 .bill-items {
   margin-bottom: 15px;
+  width: 100%;
 }
 
 .bill-item {
@@ -67,26 +78,33 @@
   align-items: center;
   padding: 8px 0;
   border-bottom: 1px dashed #eee;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .item-info {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex: 1;
+  min-width: 0;
 }
 
 .item-name {
   color: #333;
+  word-break: break-word;
 }
 
 .item-quantity {
   color: #666;
   font-size: 0.9em;
+  white-space: nowrap;
 }
 
 .item-price {
   font-weight: bold;
   color: #1976d2;
+  white-space: nowrap;
 }
 
 .bill-footer {
@@ -101,11 +119,14 @@
   align-items: center;
   font-weight: bold;
   margin-bottom: 10px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .total-amount {
   color: #1976d2;
   font-size: 1.2em;
+  white-space: nowrap;
 }
 
 .bill-info {
@@ -115,6 +136,7 @@
 
 .bill-info p {
   margin: 5px 0;
+  word-break: break-word;
 }
 
 .no-bills {
@@ -123,4 +145,31 @@
   color: #666;
   background-color: #f9f9f9;
   border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .bill-details-container {
+    padding: 10px;
+  }
+
+  .bill-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .bill-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .item-info {
+    width: 100%;
+  }
+
+  .bill-total {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 } 
