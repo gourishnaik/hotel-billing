@@ -49,10 +49,6 @@ export class MenuItemsComponent implements OnInit {
 
   addToOrder(item: MenuItem): void {
     this.billingService.addItemToOrder(item);
-    this.snackbarService.showWithAction(
-      `${item.name} added to order`,
-      'View Order',
-      3000
-    );
+    this.snackbarService.showMessage(`${item.name} added to order`);
   }
 } 

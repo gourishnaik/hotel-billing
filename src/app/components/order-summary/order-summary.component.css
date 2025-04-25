@@ -112,6 +112,7 @@
   display: flex;
   justify-content: flex-end;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
 .cancel-btn, .print-btn, .complete-btn {
@@ -119,7 +120,12 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  min-width: 120px;
+  text-align: center;
 }
 
 .cancel-btn {
@@ -147,6 +153,32 @@
 
 .complete-btn:hover {
   background-color: #1565c0;
+}
+
+@media (max-width: 768px) {
+  .order-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .cancel-btn, .print-btn, .complete-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    line-height: 1.3;
+  }
+}
+
+@media (max-width: 480px) {
+  .order-actions {
+    gap: 6px;
+  }
+
+  .cancel-btn, .print-btn, .complete-btn {
+    padding: 10px;
+    font-size: 13px;
+    line-height: 1.2;
+  }
 }
 
 .no-order {

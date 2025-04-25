@@ -26,18 +26,63 @@ import { Subscription } from 'rxjs';
       gap: 16px;
       z-index: 1000;
       box-shadow: 0 3px 5px -1px rgba(0,0,0,0.2), 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12);
+      max-width: 90%;
+      width: auto;
+      font-size: 14px;
+      line-height: 1.4;
     }
+
+    .snackbar span {
+      flex: 1;
+      word-break: break-word;
+    }
+
     button {
       background: none;
       border: none;
       color: #bbdefb;
       cursor: pointer;
       font-weight: 500;
-      padding: 0;
+      padding: 4px 8px;
       text-transform: uppercase;
+      font-size: 13px;
+      white-space: nowrap;
+      min-width: 60px;
     }
+
     button:hover {
       color: #90caf9;
+    }
+
+    @media (max-width: 768px) {
+      .snackbar {
+        bottom: 16px;
+        padding: 12px 20px;
+        gap: 12px;
+        font-size: 13px;
+      }
+
+      button {
+        padding: 4px 6px;
+        font-size: 12px;
+        min-width: 50px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .snackbar {
+        bottom: 12px;
+        padding: 10px 16px;
+        gap: 10px;
+        font-size: 12px;
+        border-radius: 3px;
+      }
+
+      button {
+        padding: 3px 5px;
+        font-size: 11px;
+        min-width: 45px;
+      }
     }
   `],
   animations: [
