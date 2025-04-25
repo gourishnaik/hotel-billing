@@ -11,10 +11,12 @@
   </div>
 
   <div class="bills-list" *ngIf="!isLoading && completedOrders.length > 0">
-    <div *ngFor="let order of completedOrders" class="bill-card">
+    <div *ngFor="let order of completedOrders.slice().reverse()" class="bill-card">
       <div class="bill-header">
         <h3>Bill #{{ order.orderId }}</h3>
-        <p class="bill-date">{{ getOrderDate(order.date) }}</p>
+        <!-- <p class="bill-date">{{ getOrderDate(order.date) }}</p> -->
+        <p class="bill-date">{{ order.date | date: 'dd/MM/yyyy, hh:mm:ss a' }}</p>
+
       </div>
 
       <div class="bill-items">
