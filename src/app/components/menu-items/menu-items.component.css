@@ -3,6 +3,7 @@
   max-width: 1200px;
   margin: 0 auto;
   box-sizing: border-box;
+  width: 100%;
 }
 
 .category-selector {
@@ -22,6 +23,7 @@
   transition: all 0.3s ease;
   min-width: 120px;
   white-space: nowrap;
+  font-size: 14px;
 }
 
 .category-btn:hover {
@@ -49,6 +51,8 @@
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   width: 100%;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 .menu-item-card:hover {
@@ -60,22 +64,28 @@
   width: 100%;
   height: 200px;
   overflow: hidden;
+  position: relative;
 }
 
 .menu-item-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.3s ease;
 }
 
 .menu-item-content {
   padding: 15px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .menu-item-content h3 {
   margin: 0 0 10px 0;
   color: #333;
   word-break: break-word;
+  font-size: 16px;
 }
 
 .description {
@@ -120,9 +130,64 @@
   box-sizing: border-box;
 }
 
+/* Mobile Responsive Styles */
+@media (max-width: 1200px) {
+  .menu-container {
+    padding: 15px;
+  }
+  
+  .menu-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
 @media (max-width: 768px) {
   .menu-container {
     padding: 10px;
+  }
+
+  .category-selector {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .category-btn {
+    min-width: 100px;
+    padding: 8px 15px;
+    font-size: 13px;
+  }
+
+  .menu-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+  }
+
+  .menu-item-image {
+    height: 160px;
+  }
+
+  .menu-item-content {
+    padding: 12px;
+  }
+
+  .menu-item-content h3 {
+    font-size: 15px;
+  }
+
+  .price {
+    font-size: 14px;
+  }
+
+  .add-to-order-btn {
+    padding: 8px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-container {
+    padding: 8px;
   }
 
   .category-selector {
@@ -132,9 +197,36 @@
 
   .category-btn {
     width: 100%;
+    margin-bottom: 5px;
   }
 
   .menu-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .menu-item-image {
+    height: 140px;
+  }
+
+  .menu-item-content {
+    padding: 10px;
+  }
+
+  .menu-item-content h3 {
+    font-size: 14px;
+  }
+
+  .price {
+    font-size: 13px;
+  }
+
+  .add-to-order-btn {
+    padding: 7px;
+    font-size: 12px;
+  }
+
+  .bill-details {
+    padding: 15px;
   }
 } 
