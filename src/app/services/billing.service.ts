@@ -32,6 +32,11 @@ export class BillingService {
     this.currentOrderSubject.next(this.currentOrder);
   }
 
+
+  
+  getTotal(): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/orders/total`);
+  }
   addItemToOrder(menuItem: MenuItem, quantity: number = 1): void {
     if (!this.currentOrder) {
       this.createNewOrder();

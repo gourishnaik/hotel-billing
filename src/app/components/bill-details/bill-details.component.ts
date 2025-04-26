@@ -11,11 +11,29 @@ export class BillDetailsComponent implements OnInit {
   completedOrders: Order[] = [];
   todayTotal: number = 0;
   isLoading: boolean = true;
-
+  total:any;
   constructor(private billingService: BillingService) { }
 
   ngOnInit(): void {
+    this.getTotal();
     this.loadOrders();
+
+  
+  }
+
+
+  getTotal(){
+    this.billingService.getTotal().subscribe({
+      next: (res:any) => {
+        console.log('Total received:', res);
+        this.total = res;
+        // Do something with res, e.g., this.total = res;
+      },
+      error: (err:any) => {
+        console.error('Error getting total:', err);
+      }
+    });
+    
   }
 
   loadOrders(): void {
@@ -37,6 +55,7 @@ export class BillDetailsComponent implements OnInit {
     return new Date(date).toLocaleString();
   }
 
+  
   private calculateTodayTotal(): void {
     const today = new Date();
     today.setHours(0, 0, 0, 0);

@@ -13,7 +13,7 @@ interface Tab {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor(private snackbarService: SnackbarService,private billling:BillingService) {}
+  constructor(private snackbarService: SnackbarService, private billling: BillingService) {}
 
   selectedTab: string = 'menu';
   
@@ -27,23 +27,23 @@ export class AppComponent implements OnInit {
     // Test snackbar on app initialization
     this.snackbarService.showMessage('Welcome to Hotel Billing System');
     this.load();
-    
   }
 
-
-  load(){
-  
-  
-      this.billling.getOrders().subscribe({
-        next: (orders) => {
-        
-        },
-        error: (error) => {
-        
-        }
-      });
-    
+  load() {
+    this.billling.getOrders().subscribe({
+      next: (orders) => {
+        // Handle orders
+      },
+      error: (error) => {
+        // Handle error
+      }
+    });
   }
+
+  shouldShowOrderSection(): boolean {
+    return this.selectedTab !== 'bills';
+  }
+
   testSnackbar() {
     this.snackbarService.showWithAction(
       'This is a test snackbar message',

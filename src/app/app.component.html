@@ -10,7 +10,7 @@
       <app-menu-items></app-menu-items>
     </div>
     
-    <div class="order-section">
+    <div class="order-section" *ngIf="shouldShowOrderSection()">
       <app-order-summary></app-order-summary>
     </div>
   </main>
