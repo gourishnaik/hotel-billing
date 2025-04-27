@@ -15,27 +15,27 @@ export class BillDetailsComponent implements OnInit {
   constructor(private billingService: BillingService) { }
 
   ngOnInit(): void {
-    this.getTotal();
-    this.loadOrders();
+    this.getTotalAndThenLoadOrders();
 
   
   }
 
 
-  getTotal(){
+
+
+  getTotalAndThenLoadOrders(): void {
     this.billingService.getTotal().subscribe({
-      next: (res:any) => {
+      next: (res: any) => {
         console.log('Total received:', res);
         this.total = res;
-        // Do something with res, e.g., this.total = res;
+        this.loadOrders(); 
       },
-      error: (err:any) => {
+      error: (err: any) => {
         console.error('Error getting total:', err);
       }
     });
-    
   }
-
+  
   loadOrders(): void {
     this.isLoading = true;
     this.billingService.getOrders().subscribe({
