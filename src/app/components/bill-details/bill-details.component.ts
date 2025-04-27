@@ -32,6 +32,7 @@ export class BillDetailsComponent implements OnInit {
       },
       error: (err: any) => {
         console.error('Error getting total:', err);
+        this.loadOrders(); 
       }
     });
   }
